@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Namoro ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            text-align: center;
+            background: #000000; 
+            color: #fff;
+            font-family: 'Dancing Script', cursive;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+        }
+
+        .welcome-message {
+            font-size: 28px;
+            color: #ff3366;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            background: #ff4d6d;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #ff3366;
+            transform: scale(1.1);
+        }
+
+        #pedido {
+            display: none;
+            font-size: 30px;
+            font-weight: bold;
+            color: #ff3366;
+            margin-top: 40px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Corações Flutuantes Corrigidos */
+        .floating-heart {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: floatUp 5s linear infinite, pulseHeart 1s infinite;
+            opacity: 0.8;
+        }
+
+        .floating-heart::before, 
+        .floating-heart::after {
+            content: "";
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .floating-heart::before {
+            top: -12px;
+            left: 0;
+        }
+
+        .floating-heart::after {
+            top: 0;
+            left: 12px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulseHeart {
+            0% {
+                transform: scale(1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(-45deg);
+            }
+            100% {
+                transform: scale(1) rotate(-45deg);
+            }
+        }
+
+        /* Novo estilo para a música do Spotify */
+        .spotify-romantic {
+            margin-top: 50px;
+            text-align: center;
+            background: rgba(255, 51, 102, 0.2);
+            padding: 15px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0px 0px 10px rgba(255, 51, 102, 0.5);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .spotify-message {
+            font-size: 22px;
+            color: #ff3366;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        iframe {
+            border-radius: 10px;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Estilo Romântico para o Pedido de Namoro */
+        .romantic-request {
+            display: none;
+            background: linear-gradient(135deg, #ff3366, #ff66b2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(255, 51, 102, 0.7);
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+            width: 60%;
+            margin: 200px auto 0 auto; /* Aumentei o margin-top para 200px */
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Animação do Pedido */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="inicio">
+        <div class="welcome-message">Minha querida Sarah! Clique aqui para continuar ❤️</div>
+        <button onclick="iniciarAnimacao()">Clique aqui</button>
+    </div>
+
+    <div class="container" id="conteudo" style="display: none;">
+        <button onclick="mostrarPedido()">Clique aqui para ver um pedido especial</button>
+        <div id="pedido">Quer namorar comigo? ❤️</div>
+    </div>
+
+    <!-- Novo layout para exibição da música -->
+    <div class="spotify-romantic">
+        <p class="spotify-message">Essa música me faz lembrar de você... Cada nota, cada palavra... ❤️</p>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2KhrPRV0V1FS2l4eQMJUWt?utm_source=generator" width="300" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+
+    <!-- Layout Romântico para o Pedido de Namoro -->
+    <div class="romantic-request" id="romantic-request">
+        Quer namorar comigo? ❤️
+    </div>
+
+    <script>
+        function iniciarAnimacao() {
+            document.getElementById("inicio").style.display = "none";
+            document.getElementById("conteudo").style.display = "block";
+            gerarCoracoesFlutuantes();
+        }
+
+        function mostrarPedido() {
+            document.getElementById("pedido").style.display = "none";
+            document.getElementById("romantic-request").style.display = "block";
+        }
+
+        function gerarCoracoesFlutuantes() {
+            const numCoracoes = 20;
+            for (let i = 0; i < numCoracoes; i++) {
+                setTimeout(criarCoracaoFlutuante, i * 300);
+            }
+        }
+
+        function criarCoracaoFlutuante() {
+            const coracao = document.createElement('div');
+            coracao.classList.add('floating-heart');
+            coracao.style.top = `${Math.random() * 50}vh`; // Alterado para criar corações mais acima na tela
+            coracao.style.left = `${Math.random() * 100}vw`;
+
+            document.body.appendChild(coracao);
+
+            setTimeout(() => {
+                coracao.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
